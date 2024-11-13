@@ -1,6 +1,6 @@
-package com.tapidindo.model; 
-import jakarta.persistence.*;
+package com.tapidindo.model;
 
+import jakarta.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -9,26 +9,25 @@ public class SugestaoEvento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_sugestao", nullable = false)
     private Integer idSugestao;
 
     @Column(nullable = false)
     private String descricao;
 
+    @Column(name = "usuario_id")
     private String usuarioId; // Pode ser usado para armazenar um nome ou identificador do usuário
 
-    @Column(nullable = false, updatable = false)
+    @Column(name = "data_sugestao", nullable = false, updatable = false, insertable = false, columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataSugestao;
 
     // Construtores
-    public SugestaoEvento() {
-        this.dataSugestao = new Date(); // Define a data de sugestão como a data atual
-    }
+    public SugestaoEvento() {}
 
     public SugestaoEvento(String descricao, String usuarioId) {
         this.descricao = descricao;
         this.usuarioId = usuarioId;
-        this.dataSugestao = new Date(); // Define a data de sugestão como a data atual
     }
 
     // Getters e Setters

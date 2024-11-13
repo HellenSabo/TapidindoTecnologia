@@ -1,7 +1,6 @@
 package com.tapidindo.model;
 
 import jakarta.persistence.*;
-
 import java.util.Date;
 
 @Entity
@@ -10,24 +9,31 @@ public class ContratacaoEvento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_contratacao", nullable = false)
     private Integer idContratacao;
 
     @ManyToOne
-    @JoinColumn(name = "evento_id", nullable = false)
+    @JoinColumn(name = "evento_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FK_evento_id"))
     private Evento evento;
 
-    @Column(nullable = false)
+    @Column(name = "data_contratacao", nullable = false)
+    @Temporal(TemporalType.DATE)
     private Date dataContratacao;
 
-    @Column(nullable = false)
+    @Column(name = "nome_contratante", nullable = false)
     private String nomeContratante;
 
     @Column(nullable = false)
     private String contato;
 
+    @Column(name = "status_reserva", nullable = false)
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
     private StatusReserva statusReserva;
+
+    // Enum para StatusReserva
+    public enum StatusReserva {
+        reservada, fechada
+    }
 
     // Construtores
     public ContratacaoEvento() {}
@@ -88,15 +94,4 @@ public class ContratacaoEvento {
     public void setStatusReserva(StatusReserva statusReserva) {
         this.statusReserva = statusReserva;
     }
-
-    public void setId(Integer id) {
-      
-        throw new UnsupportedOperationException("Unimplemented method 'setId'");
-    }
-}
-
-// Enum para o Status da Reserva
-enum StatusReserva {
-    RESERVADA,
-    FECHADA
 }

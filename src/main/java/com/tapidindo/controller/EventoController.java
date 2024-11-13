@@ -1,11 +1,11 @@
 package com.tapidindo.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 import com.tapidindo.model.Evento;
 import com.tapidindo.repository.EventoRepository;
 import com.tapidindo.exception.ResourceNotFoundException; 
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
@@ -28,14 +28,24 @@ public class EventoController {
         return eventoRepository.findAll();
     }
 
+    // Método para obter um evento pelo id
+    @GetMapping("/{id}")
+    public ResponseEntity<Evento> getEventoById(@PathVariable Integer id) {
+        Evento evento = eventoRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Evento não encontrado com id " + id));
+        return ResponseEntity.ok(evento);
+    }
+
     // Método para atualizar um evento existente
     @PutMapping("/{id}")
     public ResponseEntity<Evento> updateEvento(@PathVariable Integer id, @RequestBody Evento eventoDetails) {
         Evento evento = eventoRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Evento não encontrado com id " + id));
 
-        evento.setNome(eventoDetails.getNome());
-        evento.setData(eventoDetails.getData());
+        evento.setTitulo(eventoDetails.getTitulo());
+        evento.setDescricao(eventoDetails.getDescricao());
+        evento.setDataEvento(eventoDetails.getDataEvento());
+        evento.setLocalidade(eventoDetails.getLocalidade());
 
         Evento updatedEvento = eventoRepository.save(evento);
         return ResponseEntity.ok(updatedEvento);

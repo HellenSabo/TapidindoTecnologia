@@ -1,7 +1,6 @@
 package com.tapidindo.model;
 
 import jakarta.persistence.*;
-
 import java.util.Date;
 
 @Entity
@@ -10,23 +9,30 @@ public class CalendarioReservas {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_calendario", nullable = false)
     private Integer idCalendario;
 
-    @Column(nullable = false)
+    @Column(name = "data_evento", nullable = false)
+    @Temporal(TemporalType.DATE)
     private Date dataEvento;
 
-    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private StatusCalendario status;
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
     @ManyToOne
-    @JoinColumn(name = "evento_id")
+    @JoinColumn(name = "evento_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FK_evento_id"))
     private Evento evento;
+
+    // Enum para Status
+    public enum Status {
+        livre, preferencia, fechado
+    }
 
     // Construtores
     public CalendarioReservas() {}
 
-    public CalendarioReservas(Date dataEvento, StatusCalendario status, Evento evento) {
+    public CalendarioReservas(Date dataEvento, Status status, Evento evento) {
         this.dataEvento = dataEvento;
         this.status = status;
         this.evento = evento;
@@ -49,11 +55,11 @@ public class CalendarioReservas {
         this.dataEvento = dataEvento;
     }
 
-    public StatusCalendario getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(StatusCalendario status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
@@ -64,11 +70,4 @@ public class CalendarioReservas {
     public void setEvento(Evento evento) {
         this.evento = evento;
     }
-}
-
-// Enum para o Status do Calendário
-enum StatusCalendario {
-    LIVRE,
-    PREFERENCIA,
-    FECHADO
 }

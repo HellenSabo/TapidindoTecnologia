@@ -9,32 +9,41 @@ public class Evento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false)
     private Integer id;
 
-    @Column(nullable = false)
-    private String nome;
+    @Column(name = "titulo", nullable = false)
+    private String titulo;
 
     @Column(nullable = false)
     private String descricao;
 
-    @Column(nullable = false)
-    private Date data;
+    // Data no formato YYYY-MM-DD
+    @Column(name = "data_evento", nullable = false)
+    @Temporal(TemporalType.DATE)
+    private Date dataEvento;
 
     @Column(nullable = false)
-    private String localidade;
+    @Enumerated(EnumType.STRING)
+    private Localidade localidade;
 
-    @Column(nullable = false)
-    private String tema;
+    @Column(name = "data_criacao", nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataCriacao;
+
+    // Enum para Localidade
+    public enum Localidade {
+        Tapiocaria, Particular, Festival
+    }
 
     // Construtores
     public Evento() {}
 
-    public Evento(String nome, String descricao, Date data, String localidade, String tema) {
-        this.nome = nome;
+    public Evento(String titulo, String descricao, Date dataEvento, Localidade localidade) {
+        this.titulo = titulo;
         this.descricao = descricao;
-        this.data = data;
+        this.dataEvento = dataEvento;
         this.localidade = localidade;
-        this.tema = tema;
     }
 
     // Getters e Setters
@@ -46,12 +55,12 @@ public class Evento {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getTitulo() {
+        return titulo;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 
     public String getDescricao() {
@@ -62,27 +71,27 @@ public class Evento {
         this.descricao = descricao;
     }
 
-    public Date getData() {
-        return data;
+    public Date getDataEvento() {
+        return dataEvento;
     }
 
-    public void setData(Date data) {
-        this.data = data;
+    public void setDataEvento(Date dataEvento) {
+        this.dataEvento = dataEvento;
     }
 
-    public String getLocalidade() {
+    public Localidade getLocalidade() {
         return localidade;
     }
 
-    public void setLocalidade(String localidade) {
+    public void setLocalidade(Localidade localidade) {
         this.localidade = localidade;
     }
 
-    public String getTema() {
-        return tema;
+    public Date getDataCriacao() {
+        return dataCriacao;
     }
 
-    public void setTema(String tema) {
-        this.tema = tema;
+    public void setDataCriacao(Date dataCriacao) {
+        this.dataCriacao = dataCriacao;
     }
 }
