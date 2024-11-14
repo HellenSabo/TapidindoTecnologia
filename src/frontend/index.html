@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tapidindo Tapioca - Eventos</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tapidindo Tapioca - Eventos</h1>
+    </header>
+    <div class="event-list">
+      <button id="listarEventos">Ver Eventos</button>
+      <ul id="eventosList"></ul>
+    </div>
+
+    <div class="form-section">
+      <h2>Criar Novo Evento</h2>
+      <form id="formEvento">
+        <input type="text" id="titulo" placeholder="Título do Evento" required>
+        <input type="date" id="dataEvento" required>
+        <textarea id="descricao" placeholder="Descrição do Evento" required></textarea>
+        <input type="text" id="localidade" placeholder="Localidade do Evento" required>      
+        <button type="submit">Criar Evento</button>
+      </form>
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
