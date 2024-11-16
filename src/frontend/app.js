@@ -1,6 +1,6 @@
 // 1. Listar eventos - GET
 document.getElementById("listarEventos").addEventListener("click", function() {
-  fetch('http://localhost:8080/api/eventos') // Confirme a URL da API
+  fetch('http://localhost:8080/api/eventos')
     .then(response => response.json())
     .then(data => {
       const eventosList = document.getElementById("eventosList");
@@ -25,7 +25,7 @@ document.getElementById("formEvento").addEventListener("submit", function(event)
     localidade: document.getElementById("localidade").value
   };  
 
-  fetch('http://localhost:8080/api/eventos', {  // Confirme a URL da API
+  fetch('http://localhost:8080/api/eventos', { 
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

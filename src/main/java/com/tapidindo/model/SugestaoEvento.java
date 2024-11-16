@@ -16,7 +16,7 @@ public class SugestaoEvento {
     private String descricao;
 
     @Column(name = "usuario_id")
-    private String usuarioId; // Pode ser usado para armazenar um nome ou identificador do usuário
+    private String usuarioId;
 
     @Column(name = "data_sugestao", nullable = false, updatable = false, insertable = false, columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP")
     @Temporal(TemporalType.TIMESTAMP)

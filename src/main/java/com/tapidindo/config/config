@@ -10,8 +10,8 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/api/eventos")  // Altere conforme o caminho base da API
-                .allowedOrigins("http://localhost")  // Altere para o endereço do front-end, se necessário
+        registry.addMapping("/api/eventos") 
+                .allowedOrigins("http://localhost") 
                 .allowedMethods("GET", "POST", "PUT", "DELETE")
                 .allowedHeaders("*")
                 .allowCredentials(true);
